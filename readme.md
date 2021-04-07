@@ -29,9 +29,9 @@ network={
 
 ## Configure raspberry pi
 1. Configure the hardware
- 1. If using serial: Connect serial connections – 3.3V, gnd, tx on rs232 board to rx on pi & vice versa
- 1. If using wired ethernet, make connection 
- 1. Apply power
+ * If using serial: Connect serial connections – 3.3V, gnd, tx on rs232 board to rx on pi & vice versa
+ * If using wired ethernet, make connection 
+ * Apply power
 2. Boot, login (user = pi, password = raspberry)
  * If using ssh: ssh pi@raspberrypi.local 
  * If using serial set main computer serial port baud rate= 115200
