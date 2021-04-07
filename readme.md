@@ -1,8 +1,8 @@
-#Configure Raspberry Pi with Blinka (circuitpython) library and external jupyter notebook
+# Configure Raspberry Pi with Blinka (circuitpython) library and external jupyter notebook
 
 Set up a headless, perhaps only wireless, RaspberryPi SD Card so that Jupyter can be used remotely to develop code, including GPIO control, in a notebook.
 
-##Setup SD Card
+## Setup SD Card
 1. Download latest raspberry pi image
 2. Load SD card with os image (I use balenaEtcher)
 3. Mount sd card on your computer, navigate to “boot”
@@ -27,7 +27,7 @@ network={
  * this permits 1 login using ssh so that ssh can be enabled during setup
 7. Eject boot and move SD card to Pi
 
-##Configure raspberry pi
+## Configure raspberry pi
 1. If using serial: Connect serial connections – 3.3V, gnd, tx on board to rx on pi & vice versa
 2. Boot, login (user = pi, password = raspberry)
  * If using ssh: ssh pi@raspberrypi.local 
@@ -60,7 +60,7 @@ source .bashrc
 ```
 jupyter notebook password
 ```
-##Run Notebook 
+## Run Notebook 
 ( if I knew grep and bash I would write a simple script so I didn’t have to look up the ip address)
 ```
 ip addr #to find raspberry pi’s ip4 address
