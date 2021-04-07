@@ -39,8 +39,8 @@ sudo raspi-config
 4.	Set up wireless networking, enable ssh, resize file partition, change password, change wifi country,setup wifi connections, change system name, change to “boot to CLI with password”
 5. Leave and reboot
 6. Confirm correct system name on network (I use LanScan)
+7. SSH & Login
 ```
-SSH & Login
 sudo apt-get update
 sudo apt-get upgrade
 sudo pip3 install --upgrade setuptools
@@ -49,13 +49,14 @@ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/m
 sudo python3 raspi-blinka.py
 pip3 install notebook #this installs it in user file space, not system
 ```
-7. Edit .bashrc to include .local/bin in path, add to end
+8. Edit .bashrc to include .local/bin in path, add to end
 ```
 export PATH=$PATH:~/.local/bin
 ```
 ```
 source .bashrc
-8. set jupyter password so you don’t need to copy tokens
+```
+9. set jupyter password so you don’t need to copy tokens
 ```
 jupyter notebook password
 ```
@@ -66,5 +67,5 @@ ip addr #to find raspberry pi’s ip4 address
 jupyter notebook --no-browser --ip=ip4 --port=8888
 ```
 
-9. on main computer open browser,  _newraspberrypiname.local:8888_
+10. on main computer open browser, _newraspberrypiname.local:8888_
 
