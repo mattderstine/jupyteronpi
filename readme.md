@@ -12,7 +12,7 @@ Set up a headless, perhaps only wireless, RaspberryPi SD Card so that Jupyter ca
 enable_uart=1
 ```
 
-5. create wpa_supplicant.conf file if WIFI needed
+5. Create [wpa_supplicant.conf](https://github.com/mattderstine/jupyteronpi/blob/master/wpa_supplicant.conf?raw=true) file if WIFI needed. Edit for the correct ssid and password.
 ```
 country=US
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -23,23 +23,27 @@ network={
        key_mgmt=WPA-PSK
     }
 ```
-6. Add empty ssh file
- * this permits 1 login using ssh so that ssh can be enabled during setup
-7. Eject boot and move SD card to Pi
+6. Create ssh file
+ * this permits a single login using ssh so that ssh can be enabled during setup. This file is deleted after the login. 
+7. Eject "boot" and move SD card to Pi
 
 ## Configure raspberry pi
-1. If using serial: Connect serial connections – 3.3V, gnd, tx on board to rx on pi & vice versa
+1. Configure the hardware
+ 1. If using serial: Connect serial connections – 3.3V, gnd, tx on rs232 board to rx on pi & vice versa
+ 1. If using wired ethernet, make connection 
+ 1. Apply power
 2. Boot, login (user = pi, password = raspberry)
  * If using ssh: ssh pi@raspberrypi.local 
- * If using serial, baud rate= 115200
-3. Enter
+ * If using serial set main computer serial port baud rate= 115200
+3. Configure the pi using:
 ```
 sudo raspi-config
 ```
 4.	Set up wireless networking, enable ssh, resize file partition, change password, change wifi country,setup wifi connections, change system name, change to “boot to CLI with password”
-5. Leave and reboot
+5. Exit program and reboot
 6. Confirm correct system name on network (I use LanScan)
-7. SSH & Login
+7. SSH to pi@newsystemname.local & Login.
+8. Add blinka and jupyter notebook
 ```
 sudo apt-get update
 sudo apt-get upgrade
@@ -49,23 +53,25 @@ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/m
 sudo python3 raspi-blinka.py
 pip3 install notebook #this installs it in user file space, not system
 ```
-8. Edit .bashrc to include .local/bin in path, add to end
+9. Edit .bashrc to include .local/bin in path, add to end
 ```
 export PATH=$PATH:~/.local/bin
 ```
 ```
 source .bashrc
 ```
-9. set jupyter password so you don’t need to copy tokens
+10. set jupyter password so you don’t need to copy tokens
 ```
 jupyter notebook password
 ```
 ## Run Notebook 
+The notebook is expected to be run in a ssh session at normal user prividges. It will terminate if the session is interupted.
 ( if I knew grep and bash I would write a simple script so I didn’t have to look up the ip address)
+1. Start notebook on pi
 ```
-ip addr #to find raspberry pi’s ip4 address
-jupyter notebook --no-browser --ip=ip4 --port=8888
+ip addr #to find raspberry pi’s ip4 address: xx.yy.zz.aa
+jupyter notebook --no-browser --ip=xx.yy.zz.aa --port=8888
 ```
 
-10. on main computer open browser, _newraspberrypiname.local:8888_
+2. on main computer open browser, _newraspberrypiname.local:8888_
 
