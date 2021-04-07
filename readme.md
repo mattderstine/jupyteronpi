@@ -1,5 +1,7 @@
 #Configure Raspberry Pi with Blinka (circuitpython) library and external jupyter notebook
 
+Set up a headless, perhaps only wireless, RaspberryPi SD Card so that Jupyter can be used remotely to develop code, including GPIO control, in a notebook.
+
 ##Setup SD Card
 1. Download latest raspberry pi image
 2. Load SD card with os image (I use balenaEtcher)
@@ -22,7 +24,7 @@ network={
     }
 ```
 6. Add empty ssh file
- * this permits 1 login using ssh so that ssh can be enabled during setup)
+ * this permits 1 login using ssh so that ssh can be enabled during setup
 7. Eject boot and move SD card to Pi
 
 ##Configure raspberry pi
@@ -36,7 +38,7 @@ sudo raspi-config
 ```
 4.	Set up wireless networking, enable ssh, resize file partition, change password, change wifi country,setup wifi connections, change system name, change to “boot to CLI with password”
 5. Leave and reboot
-6. Check for new name on network (I use LanScan)
+6. Confirm correct system name on network (I use LanScan)
 ```
 SSH & Login
 sudo apt-get update
@@ -45,9 +47,9 @@ sudo pip3 install --upgrade setuptools
 sudo pip3 install --upgrade adafruit-python-shell
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
 sudo python3 raspi-blinka.py
-pip3 install notebook. #this installs it in user file space, not system
+pip3 install notebook #this installs it in user file space, not system
 ```
-7. Fix .bashrc to include .local/bin in path, add to end
+7. Edit .bashrc to include .local/bin in path, add to end
 ```
 export PATH=$PATH:~/.local/bin
 ```
