@@ -39,7 +39,7 @@ network={
 ```
 sudo raspi-config
 ```
-4.	Set up wireless networking, enable ssh, resize file partition, change password, change wifi country,setup wifi connections, change system name, change to “boot to CLI with password”
+4.	Set up wireless networking, enable ssh, resize file partition, change password, change wifi country,setup wifi connections, change system name, change to “boot to CLI with password”, timezone
 5. Exit program and reboot
 6. Confirm correct system name on network (I use LanScan)
 7. SSH to pi@newsystemname.local & Login.
@@ -47,6 +47,7 @@ sudo raspi-config
 ```
 sudo apt-get update
 sudo apt-get upgrade
+sudo apt-get install python3-pip
 sudo pip3 install --upgrade setuptools
 sudo pip3 install --upgrade adafruit-python-shell
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
