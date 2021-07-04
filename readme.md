@@ -89,3 +89,47 @@ jupyter notebook --no-browser --ip=xx.yy.zz.aa --port=8888
 
 2. on main computer open browser, _newraspberrypiname.local:8888_
 
+## Set Fixed IP and autorun Notebook
+
+One way to minimize connection complexity is to connect to the RaspberryPi using a dedicated ethernet link.
+
+
+### Set up fallback fixed IP and autorun Notebook on the Raspberry PI
+
+While still connected via DHCP, edit ```/etc/dhcpcd.conf``` and add the following lines
+```
+# It is possible to fall back to a static IP if DHCP fails:
+define static profile
+profile static_eth0
+static ip_address=192.168.57.23/24
+static routers=192.168.57.1
+static domain_name_servers=192.168.57.1
+
+# fallback to static profile on eth0
+interface eth0
+fallback static_eth0
+
+```
+
+Edit ```crontab -e``` and add
+```
+@reboot /home/pi/.local/jupyter notebook --no-browser --ip=192.168.57.23 --port=8888
+```
+
+When this RP boots, this will abort if DHCP is used to assign an ethernet address. Use the instructions to "Run Notebook" above in that case.
+
+Shut down the RP.
+
+### Set up a fixed ethernet port on PC or Mac and connect to the RP
+1. Plug in the doggle to the computer. 
+
+1. In the networking settings, find this adapter and change it to have a fixed IP of something like ```192.168.57.2``` with a subnet mask
+of ```255.255.255.0``` or /24.  You may need to specify a router port. Use ```192.168.57.1```. If you need to add a DNS address use ```8.8.8.8``` (Google) and/or ```192.168.57.1```. These are placeholders and don't matter.
+
+1. Connect the RP to the doggle and let it boot. 
+
+1. In a browser enter ```192.168.57.23:8888```  The login to the jupyter notebook should appear.  Shell access is with 
+```bash
+ssh pi@192.168.57.23
+```
+
